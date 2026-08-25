@@ -1,4 +1,5 @@
-from hypothesis import given, strategies as st
+from hypothesis import given
+from hypothesis import strategies as st
 
 from groundloop.hydraulics import (
     friction_factor,
@@ -6,7 +7,6 @@ from groundloop.hydraulics import (
     reynolds_number,
     velocity_m_s,
 )
-
 
 positive_flow = st.floats(min_value=0.05, max_value=5.0, allow_nan=False, allow_infinity=False)
 pipe_diameter = st.floats(min_value=0.02, max_value=0.06, allow_nan=False, allow_infinity=False)
