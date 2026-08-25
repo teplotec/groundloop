@@ -47,7 +47,9 @@ button {
 
 @media (max-width: 767px) {
   form > .sticky {
-    position: static;
+    position: static !important;
+    inset: auto !important;
+    z-index: auto;
     margin-top: 1rem;
   }
 }
