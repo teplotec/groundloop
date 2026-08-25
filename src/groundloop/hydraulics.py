@@ -1,7 +1,6 @@
 from __future__ import annotations
 
-from math import log10, pi, sqrt
-
+from math import log10, pi
 
 PE_ABSOLUTE_ROUGHNESS_M = 1.5e-6
 
