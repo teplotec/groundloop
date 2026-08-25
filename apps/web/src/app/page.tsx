@@ -415,7 +415,7 @@ export default function Home() {
           </div>
         </Section>
 
-        <div className="sticky bottom-3 z-10 mt-4 rounded-[24px] border border-hair bg-white/90 p-3 shadow-xl shadow-ink/10 backdrop-blur-xl">
+        <div className="mt-4 rounded-[24px] border border-hair bg-white/90 p-3 shadow-xl shadow-ink/10 backdrop-blur-xl md:sticky md:bottom-3 md:z-10">
           <button
             className="primary-action min-h-14 w-full rounded-[18px] bg-ink px-5 py-4 text-base font-semibold text-white disabled:cursor-not-allowed disabled:opacity-50"
             type="submit"
