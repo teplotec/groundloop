@@ -52,14 +52,16 @@ class FluidState(BaseModel):
 class Borefield(BaseModel):
     boreholes: int = Field(ge=1, le=1000)
     depth_m: float = Field(gt=0, le=1000)
+    # One-way surface distance from a borehole to the manifold/collector.
     header_run_m: float = Field(ge=0, le=5000)
     configuration: LoopConfiguration = LoopConfiguration.SINGLE_U
 
     @property
     def active_pipe_length_per_branch_m(self) -> float:
-        # Single-U has one down leg and one up leg. A Double-U borehole has two
-        # parallel U-tubes; each hydraulic branch still traverses 2 x depth.
-        return self.depth_m * 2 + self.header_run_m
+        # Every U-tube hydraulic branch has a down leg and an up leg. The same
+        # applies to the surface connection: supply and return each traverse the
+        # one-way header distance.
+        return 2 * (self.depth_m + self.header_run_m)
 
 
 class PumpPoint(BaseModel):
