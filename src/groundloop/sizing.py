@@ -7,8 +7,12 @@ from groundloop.hydraulics import (
     reynolds_number,
     velocity_m_s,
 )
-from groundloop.models import CandidateResult, LoopConfiguration, SizingRequest, SizingResponse
-
+from groundloop.models import (
+    CandidateResult,
+    LoopConfiguration,
+    SizingRequest,
+    SizingResponse,
+)
 
 MIN_DESIGN_REYNOLDS = 2500.0
 
