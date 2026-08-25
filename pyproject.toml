@@ -10,7 +10,7 @@ dependencies = [
   "pygfunction>=2.3,<3",
 ]
 
-[project.optional-dependencies]
+[dependency-groups]
 dev = [
   "httpx>=0.28,<1",
   "hypothesis>=6.138,<7",
@@ -43,4 +43,8 @@ ignore = ["E501"]
 [tool.mypy]
 python_version = "3.13"
 strict = true
-packages = ["groundloop"]
+files = ["src/groundloop", "apps/api"]
+mypy_path = "src"
+
+[tool.uv]
+required-version = ">=0.12.5,<0.13"
