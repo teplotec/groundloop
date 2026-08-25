@@ -25,7 +25,7 @@ class PipeCandidate(BaseModel):
     wall_thickness_mm: float = Field(gt=0)
 
     @model_validator(mode="after")
-    def wall_must_leave_a_bore(self) -> "PipeCandidate":
+    def wall_must_leave_a_bore(self) -> PipeCandidate:
         if self.wall_thickness_mm * 2 >= self.outer_diameter_mm:
             raise ValueError("Pipe wall thickness must be less than half the outer diameter")
         return self
