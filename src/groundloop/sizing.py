@@ -90,7 +90,7 @@ def calculate(request: SizingRequest) -> SizingResponse:
         "Hydraulic calculation uses Darcy-Weisbach pressure loss and the Haaland approximation.",
         "PE absolute roughness is provisionally fixed at 1.5 micrometres.",
         "The current model treats borehole branches as balanced parallel branches.",
-        "Header, fittings, heat-pump exchanger, filter, valves, and manifold losses are not yet included.",
+        "Straight borehole and supply/return header pipe are included; fittings, collector/manifold network, heat-pump exchanger, filter, and valve losses are not yet included.",
         "The pump input is a single operating-point head, not a full interpolated pump curve.",
         "Reynolds 2500 is currently used as a provisional design screening target.",
     ]
