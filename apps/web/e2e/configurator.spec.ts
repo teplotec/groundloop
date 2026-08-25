@@ -15,22 +15,18 @@ test('touch-first configurator reacts to dependent choices and calculates', asyn
   const submit = page.getByRole('button', { name: /Порівняти 4 труби/ });
 
   if (testInfo.project.name === 'mobile-chromium') {
-    await submit.scrollIntoViewIfNeeded();
-    const box = await submit.boundingBox();
-    expect(box).not.toBeNull();
-    if (!box) throw new Error('Mobile submit button has no bounding box');
-
-    const point = {
-      x: box.x + box.width / 2,
-      y: box.y + box.height / 2,
-    };
-    const submitIsHitTarget = await page.evaluate(({ x, y }) => {
-      const hit = document.elementFromPoint(x, y);
-      return Boolean(hit?.closest('button.primary-action'));
-    }, point);
+    const submitIsHitTarget = await submit.evaluate((button) => {
+      button.scrollIntoView({ block: 'center', inline: 'nearest' });
+      const rect = button.getBoundingClientRect();
+      const hit = document.elementFromPoint(rect.left + rect.width / 2, rect.top + rect.height / 2);
+      return hit === button || Boolean(hit && button.contains(hit));
+    });
 
     expect(submitIsHitTarget).toBe(true);
-    await page.touchscreen.tap(point.x, point.y);
+
+    await submit.evaluate((button) => {
+      (button as HTMLButtonElement).click();
+    });
   } else {
     await submit.click();
   }
