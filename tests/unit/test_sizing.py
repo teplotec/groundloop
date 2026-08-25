@@ -55,6 +55,17 @@ def test_calculation_compares_pipe_candidates() -> None:
     assert result.provisional is True
 
 
+def test_borefield_branch_length_counts_supply_and_return() -> None:
+    borefield = Borefield(
+        boreholes=5,
+        depth_m=61,
+        header_run_m=12,
+        configuration="single_u",
+    )
+
+    assert borefield.active_pipe_length_per_branch_m == 146
+
+
 def test_double_u_splits_flow_across_twice_as_many_branches() -> None:
     base = dict(
         total_flow_m3_h=2.4,
