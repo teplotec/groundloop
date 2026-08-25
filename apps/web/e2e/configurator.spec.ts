@@ -15,5 +15,6 @@ test('touch-first configurator reacts to dependent choices and calculates', asyn
   await page.getByRole('button', { name: /Порівняти 4 труби/ }).click();
 
   await expect(page.getByRole('heading', { name: 'Порівняння кандидатів' })).toBeVisible();
-  await expect(page.getByText(/recommended/i).first()).toBeVisible();
+  await expect(page.getByText(/PE100-RC 40 × 3.7/)).toBeVisible();
+  await expect(page.getByText('provisional', { exact: true })).toBeVisible();
 });
