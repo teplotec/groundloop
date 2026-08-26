@@ -45,6 +45,124 @@ button {
   appearance: textfield;
 }
 
+/*
+ * Pipe candidate drawings share one physical scale: Ø50 is the reference,
+ * Ø40 is rendered at 80%, and Ø32 at 64%. The SVG already computes the
+ * inner/outer ratio from the actual wall thickness, so scaling the whole
+ * drawing preserves both OD and ID relationships across candidates.
+ */
+form > section:nth-of-type(4) .choice-card > div:first-child {
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+form > section:nth-of-type(4) .choice-card > div:first-child > div:first-child {
+  position: relative;
+  display: grid;
+  width: 100%;
+  height: 9.25rem;
+  flex: none;
+  place-items: center;
+  overflow: visible;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+}
+
+form > section:nth-of-type(4) .choice-card > div:first-child > div:first-child svg {
+  width: 7.5rem;
+  height: 7.5rem;
+  overflow: visible;
+  transform-origin: center;
+}
+
+form > section:nth-of-type(4) .choice-card:nth-child(1) > div:first-child > div:first-child svg {
+  transform: scale(0.64);
+}
+
+form > section:nth-of-type(4) .choice-card:nth-child(2) > div:first-child > div:first-child svg,
+form > section:nth-of-type(4) .choice-card:nth-child(3) > div:first-child > div:first-child svg {
+  transform: scale(0.8);
+}
+
+form > section:nth-of-type(4) .choice-card:nth-child(4) > div:first-child > div:first-child svg {
+  transform: scale(1);
+}
+
+form > section:nth-of-type(4) .choice-card > div:first-child > div:first-child::before {
+  content: '';
+  position: absolute;
+  z-index: 2;
+  width: 4.15rem;
+  height: 2.9rem;
+  background: currentColor;
+  pointer-events: none;
+  -webkit-mask:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 68 48'%3E%3Cpath d='M3 45 L31 10 H66' fill='none' stroke='black' stroke-width='1.6' stroke-linecap='square' stroke-linejoin='miter'/%3E%3Cpath d='M3 45 L8.5 41.8 L7.2 36.2 Z' fill='black'/%3E%3C/svg%3E")
+    center / contain no-repeat;
+  mask:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 68 48'%3E%3Cpath d='M3 45 L31 10 H66' fill='none' stroke='black' stroke-width='1.6' stroke-linecap='square' stroke-linejoin='miter'/%3E%3Cpath d='M3 45 L8.5 41.8 L7.2 36.2 Z' fill='black'/%3E%3C/svg%3E")
+    center / contain no-repeat;
+  opacity: 0.88;
+}
+
+form > section:nth-of-type(4) .choice-card > div:first-child > div:first-child::after {
+  position: absolute;
+  z-index: 3;
+  white-space: nowrap;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+  font-size: 0.7rem;
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  pointer-events: none;
+}
+
+form > section:nth-of-type(4) .choice-card:nth-child(1) > div:first-child > div:first-child::before {
+  top: 0.42rem;
+  left: calc(50% + 1.12rem);
+}
+
+form > section:nth-of-type(4) .choice-card:nth-child(1) > div:first-child > div:first-child::after {
+  content: 'Ø32 mm';
+  top: 0.16rem;
+  left: calc(50% + 3rem);
+}
+
+form > section:nth-of-type(4) .choice-card:nth-child(2) > div:first-child > div:first-child::before,
+form > section:nth-of-type(4) .choice-card:nth-child(3) > div:first-child > div:first-child::before {
+  top: 0.05rem;
+  left: calc(50% + 1.42rem);
+}
+
+form > section:nth-of-type(4) .choice-card:nth-child(2) > div:first-child > div:first-child::after,
+form > section:nth-of-type(4) .choice-card:nth-child(3) > div:first-child > div:first-child::after {
+  content: 'Ø40 mm';
+  top: -0.18rem;
+  left: calc(50% + 3.3rem);
+}
+
+form > section:nth-of-type(4) .choice-card:nth-child(4) > div:first-child > div:first-child::before {
+  top: -0.35rem;
+  left: calc(50% + 1.78rem);
+}
+
+form > section:nth-of-type(4) .choice-card:nth-child(4) > div:first-child > div:first-child::after {
+  content: 'Ø50 mm';
+  top: -0.58rem;
+  left: calc(50% + 3.66rem);
+}
+
+form > section:nth-of-type(4) .choice-card > div:first-child > div:nth-child(2) {
+  width: 100%;
+  text-align: center;
+}
+
+form > section:nth-of-type(4) .choice-card > div:first-child > div:nth-child(2) > div:first-child {
+  justify-content: center;
+}
+
 @media (max-width: 767px) {
   form > .sticky {
     position: static !important;
