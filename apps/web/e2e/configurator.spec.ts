@@ -1,15 +1,22 @@
 import { expect, test } from '@playwright/test';
 
+async function waitForHydration(page: import('@playwright/test').Page) {
+  await expect(page.locator('html')).toHaveAttribute('data-hydrated', 'true');
+}
+
 test('touch-first configurator reacts to dependent choices and calculates', async ({ page }, testInfo) => {
   await page.goto('/');
 
   await expect(page.getByRole('heading', { name: /Підбираємо контур цифрами/ })).toBeVisible();
+  await waitForHydration(page);
   await expect(page.locator('select')).toHaveCount(0);
   await expect(page.getByRole('button', { name: /Single-U/ })).toBeVisible();
   await expect(page.getByRole('button', { name: /PG 20%/ })).toBeVisible();
   await expect(page.getByRole('button', { name: /PE100-RC 40 × 3.7/ })).toBeVisible();
 
-  await page.getByRole('button', { name: /Double-U/ }).click();
+  const doubleU = page.getByRole('button', { name: /Подвійний U-зонд/ });
+  await doubleU.click();
+  await expect(doubleU).toHaveAttribute('aria-pressed', 'true');
   await expect(page.getByText('0.24', { exact: true }).first()).toBeVisible();
 
   const submit = page.getByRole('button', { name: /Порівняти 4 труби/ });
@@ -48,6 +55,7 @@ test('Ukrainian is the default and the engineering copy can switch to English', 
   await page.goto('/');
 
   await expect(page.getByRole('heading', { name: /Підбираємо контур цифрами/ })).toBeVisible();
+  await waitForHydration(page);
   await page.getByRole('button', { name: 'EN', exact: true }).click();
   await expect(page.getByRole('heading', { name: 'Size the loop with numbers, not habit.' })).toBeVisible();
   await expect(page.getByRole('heading', { name: 'Pipe candidates' })).toBeVisible();

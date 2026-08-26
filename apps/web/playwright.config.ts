@@ -25,7 +25,7 @@ export default defineConfig({
       timeout: 30_000,
     },
     {
-      command: 'GROUNDLOOP_API_URL=http://127.0.0.1:8000 npm run dev -- --hostname 127.0.0.1',
+      command: 'GROUNDLOOP_API_URL=http://127.0.0.1:8000 npm run dev:vinext -- --hostname 127.0.0.1 --port 3000',
       url: 'http://127.0.0.1:3000',
       reuseExistingServer: true,
       timeout: 60_000,
