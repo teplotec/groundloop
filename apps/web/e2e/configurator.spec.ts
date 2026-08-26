@@ -48,10 +48,10 @@ test('Ukrainian is the default and the engineering copy can switch to English', 
   await page.goto('/');
 
   await expect(page.getByRole('heading', { name: /Підбираємо контур цифрами/ })).toBeVisible();
-  await page.getByRole('button', { name: 'EN' }).click();
+  await page.getByRole('button', { name: 'EN', exact: true }).click();
   await expect(page.getByRole('heading', { name: 'Size the loop with numbers, not habit.' })).toBeVisible();
   await expect(page.getByRole('heading', { name: 'Pipe candidates' })).toBeVisible();
 
-  await page.getByRole('button', { name: 'UA' }).click();
+  await page.getByRole('button', { name: 'UA', exact: true }).click();
   await expect(page.getByRole('heading', { name: 'Труби для порівняння' })).toBeVisible();
 });
