@@ -7,7 +7,7 @@ test('touch-first configurator reacts to dependent choices and calculates', asyn
   await expect(page.locator('select')).toHaveCount(0);
   await expect(page.getByRole('button', { name: /Single-U/ })).toBeVisible();
   await expect(page.getByRole('button', { name: /PG 20%/ })).toBeVisible();
-  await expect(page.getByRole('button', { name: /40 × 3.7/ })).toBeVisible();
+  await expect(page.getByRole('button', { name: /PE100-RC 40 × 3.7/ })).toBeVisible();
 
   await page.getByRole('button', { name: /Double-U/ }).click();
   await expect(page.getByText('0.24', { exact: true }).first()).toBeVisible();
@@ -31,7 +31,27 @@ test('touch-first configurator reacts to dependent choices and calculates', asyn
     await submit.click();
   }
 
-  await expect(page.getByRole('heading', { name: 'Порівняння кандидатів' })).toBeVisible();
+  const resultsHeading = page.getByRole('heading', { name: 'Порівняння кандидатів' });
+  await expect(resultsHeading).toBeVisible();
   await expect(page.getByText(/PE100-RC 40 × 3.7/)).toBeVisible();
-  await expect(page.getByText('provisional', { exact: true })).toBeVisible();
+  await expect(page.getByText('попередня модель', { exact: true })).toBeVisible();
+
+  await expect.poll(async () =>
+    resultsHeading.evaluate((heading) => {
+      const rect = heading.getBoundingClientRect();
+      return rect.top >= 0 && rect.top < window.innerHeight;
+    }),
+  ).toBe(true);
+});
+
+test('Ukrainian is the default and the engineering copy can switch to English', async ({ page }) => {
+  await page.goto('/');
+
+  await expect(page.getByRole('heading', { name: /Підбираємо контур цифрами/ })).toBeVisible();
+  await page.getByRole('button', { name: 'EN', exact: true }).click();
+  await expect(page.getByRole('heading', { name: 'Size the loop with numbers, not habit.' })).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'Pipe candidates' })).toBeVisible();
+
+  await page.getByRole('button', { name: 'UA', exact: true }).click();
+  await expect(page.getByRole('heading', { name: 'Труби для порівняння' })).toBeVisible();
 });
