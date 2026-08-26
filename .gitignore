@@ -11,6 +11,9 @@ htmlcov/
 # Node
 node_modules/
 .next/
+.open-next/
+.vinext/
+dist/
 out/
 coverage/
 

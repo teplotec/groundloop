@@ -38,12 +38,18 @@ jobs:
           node-version: '22'
       - name: Install web dependencies
         run: npm install
+      - name: Audit production dependencies
+        run: npm audit --omit=dev --audit-level=high
       - name: Unit tests
         run: npm test
       - name: Typecheck
         run: npm run typecheck
-      - name: Build
+      - name: Next.js baseline build
         run: npm run build
+      - name: Vinext compatibility check
+        run: npm run vinext:check
+      - name: Vinext production build
+        run: npm run build:vinext
 
   browser-smoke:
     runs-on: ubuntu-latest
@@ -71,5 +77,5 @@ jobs:
         run: npm install
       - name: Install Chromium
         run: npx playwright install --with-deps chromium
-      - name: Run browser smoke
+      - name: Run browser smoke through vinext
         run: npm run test:e2e

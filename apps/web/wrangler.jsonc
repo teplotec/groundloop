@@ -2,32 +2,23 @@
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "groundloop-web",
   "account_id": "99ba799419a248bd07b291f9a6d40590",
-  "main": ".open-next/worker.js",
-  "compatibility_date": "2026-08-25",
+  "main": "./worker/index.ts",
+  "compatibility_date": "2026-08-26",
   "compatibility_flags": ["nodejs_compat", "global_fetch_strictly_public"],
   "workers_dev": true,
   "preview_urls": true,
+  "routes": [
+    {
+      "pattern": "groundloop.teplotec.com",
+      "custom_domain": true
+    }
+  ],
   "vars": {
     "GROUNDLOOP_API_URL": "https://groundloop-api.teplotec.com"
   },
   "assets": {
-    "directory": ".open-next/assets",
+    "not_found_handling": "none",
     "binding": "ASSETS"
-  },
-  "services": [
-    {
-      "binding": "WORKER_SELF_REFERENCE",
-      "service": "groundloop-web"
-    }
-  ],
-  "r2_buckets": [
-    {
-      "binding": "NEXT_INC_CACHE_R2_BUCKET",
-      "bucket_name": "groundloop-web-opennext-cache"
-    }
-  ],
-  "images": {
-    "binding": "IMAGES"
   },
   "observability": {
     "enabled": true,
